@@ -4,7 +4,7 @@
   "info": {
     "singularName": "d-il",
     "pluralName": "d-ils",
-    "displayName": "Dİl"
+    "displayName": "Dil"
   },
   "options": {
     "draftAndPublish": true
@@ -29,6 +29,12 @@
     },
     "aktif": {
       "type": "boolean"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course",
+      "mappedBy": "d_il"
     }
   }
 }

@@ -535,7 +535,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
     description: 'Organize your content into categories';
-    displayName: 'Category';
+    displayName: 'Kategori';
     pluralName: 'categories';
     singularName: 'category';
   };
@@ -543,18 +543,20 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    aciklama: Schema.Attribute.String;
+    ad: Schema.Attribute.String;
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    ikon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::category.category'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID;
     updatedAt: Schema.Attribute.DateTime;
@@ -579,7 +581,9 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    d_il: Schema.Attribute.Relation<'oneToOne', 'api::d-il.d-il'>;
     kapak: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    kategoris: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -597,7 +601,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
 export interface ApiDIlDIl extends Struct.CollectionTypeSchema {
   collectionName: 'd_ils';
   info: {
-    displayName: 'D\u0130l';
+    displayName: 'Dil';
     pluralName: 'd-ils';
     singularName: 'd-il';
   };
@@ -608,6 +612,7 @@ export interface ApiDIlDIl extends Struct.CollectionTypeSchema {
     Ad: Schema.Attribute.String;
     aktif: Schema.Attribute.Boolean;
     Bayrak: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    course: Schema.Attribute.Relation<'oneToOne', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
